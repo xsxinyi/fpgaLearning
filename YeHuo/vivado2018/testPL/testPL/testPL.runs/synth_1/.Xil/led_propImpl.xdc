@@ -1,0 +1,5 @@
+set_property SRC_FILE_INFO {cfile:G:/Git/fpgaLearning/YeHuo/vivado2018/testPL/testPL/testPL.srcs/constrs_1/new/testPL_xdc.xdc rfile:../../../testPL.srcs/constrs_1/new/testPL_xdc.xdc id:1} [current_design]
+set_property src_info {type:XDC file:1 line:1 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN G20 [get_ports key_in]
+set_property src_info {type:XDC file:1 line:3 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN K16 [get_ports led_out]

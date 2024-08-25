@@ -1,0 +1,6 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "G:/Git/fpgaLearning/YeHuo/vivado2018/testPL/testPL/testPL.srcs/sources_1/new/testPL.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module led
+INFO: [VRFC 10-2263] Analyzing Verilog file "G:/Git/fpgaLearning/YeHuo/vivado2018/testPL/testPL/testPL.srcs/sim_1/new/testPL_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module testPL_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "G:/Git/fpgaLearning/YeHuo/vivado2018/testPL/testPL/testPL.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
