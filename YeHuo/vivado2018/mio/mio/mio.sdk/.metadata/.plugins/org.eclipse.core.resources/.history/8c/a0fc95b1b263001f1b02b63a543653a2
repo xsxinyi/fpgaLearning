@@ -1,0 +1,14 @@
+/*
+ * main.c
+ *
+ *  Created on: 2024Äê8ÔÂ26ÈÕ
+ *      Author: Administrator
+ */
+
+#include "stdio.h"
+
+int main()
+{
+	printf("MIO test..\n");
+	return 0;
+}

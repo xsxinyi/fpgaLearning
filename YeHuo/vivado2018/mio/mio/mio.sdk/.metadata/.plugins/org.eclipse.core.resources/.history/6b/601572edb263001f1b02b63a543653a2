@@ -1,0 +1,25 @@
+/*
+ * main.c
+ *
+ *  Created on: 2024Äê8ÔÂ26ÈÕ
+ *      Author: Administrator
+ */
+
+#include "stdio.h"
+#include "xparameters.h"
+#include "xgpiops.h"
+#include "xstatus.h"
+#include "xplatform_info.h"
+#include <xil_printf.h>
+
+// macro definition
+#define GPIO_DEVICE_ID  	XPAR_XGPIOPS_0_DEVICE_ID
+
+// global variables
+
+
+int main()
+{
+	printf("MIO test..\n");
+	return 0;
+}

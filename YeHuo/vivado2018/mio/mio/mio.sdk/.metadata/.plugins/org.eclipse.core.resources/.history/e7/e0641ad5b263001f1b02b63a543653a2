@@ -1,0 +1,19 @@
+/*
+ * main.c
+ *
+ *  Created on: 2024Äê8ÔÂ26ÈÕ
+ *      Author: Administrator
+ */
+
+#include "stdio.h"
+#include "xparameters.h"
+#include "xgpiops.h"
+#include "xstatus.h"
+#include "xplatform_info.h"
+#include <xil_printf.h>
+
+int main()
+{
+	printf("MIO test..\n");
+	return 0;
+}

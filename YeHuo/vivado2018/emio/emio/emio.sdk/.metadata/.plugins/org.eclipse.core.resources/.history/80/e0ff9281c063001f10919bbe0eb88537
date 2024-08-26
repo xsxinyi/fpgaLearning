@@ -1,0 +1,74 @@
+/*
+ * main.c
+ *
+ *  Created on: 2024Äê8ÔÂ26ÈÕ
+ *      Author: Administrator
+ */
+
+#include "stdio.h"
+#include "sleep.h"
+#include "xparameters.h"
+#include "xgpiops.h"
+#include "xstatus.h"
+#include "xplatform_info.h"
+#include <xil_printf.h>
+
+/* macro definition
+ * ======================================================================
+ */
+#define GPIO_DEVICE_ID  	XPAR_XGPIOPS_0_DEVICE_ID
+
+
+#define PL_KEY
+
+// Check the data sheet to find the MIO ID.
+#define PS_KEY	10
+#define PS_LED	0
+
+/* global variables
+ * ======================================================================
+ */
+
+// The following are declared globally so they are zeroed and can beeasily accessible from a debugger.
+XGpioPs PS_Gpio;	/* The driver instance for GPIO Device. */
+
+int gFlag;
+
+int main()
+{
+	int Status;
+	XGpioPs_Config *PS_ConfigPtr;
+
+	printf("EMIO test..\n");
+
+	/* Initialize the GPIO driver. */
+	PS_ConfigPtr = XGpioPs_LookupConfig(GPIO_DEVICE_ID);
+	Status = XGpioPs_CfgInitialize(&PS_Gpio, PS_ConfigPtr,
+			PS_ConfigPtr->BaseAddr);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	// LED setting..
+	XGpioPs_SetDirectionPin(&PS_Gpio, PS_LED, 1);
+	XGpioPs_SetOutputEnablePin(&PS_Gpio, PS_LED, 1);
+
+	// KEY setting..
+	XGpioPs_SetDirectionPin(&PS_Gpio, PS_KEY, 0);
+
+	while(1)
+	{
+		// Low level when the key is pressed
+		if(XGpioPs_ReadPin(&PS_Gpio, PS_KEY) == 0)
+		{
+			gFlag = ~ gFlag;
+		}
+
+		/* Set the GPIO output to be low. */
+		XGpioPs_WritePin(&PS_Gpio, PS_LED, gFlag);
+
+	}
+
+
+	return 0;
+}

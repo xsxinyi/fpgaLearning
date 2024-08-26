@@ -1,0 +1,43 @@
+/*
+ * main.c
+ *
+ *  Created on: 2024Äê8ÔÂ26ÈÕ
+ *      Author: Administrator
+ */
+
+#include "stdio.h"
+#include "xparameters.h"
+#include "xgpiops.h"
+#include "xstatus.h"
+#include "xplatform_info.h"
+#include <xil_printf.h>
+
+/* macro definition
+ * ======================================================================
+ */
+#define GPIO_DEVICE_ID  	XPAR_XGPIOPS_0_DEVICE_ID
+
+/* global variables
+ * ======================================================================
+ */
+
+// The following are declared globally so they are zeroed and can beeasily accessible from a debugger.
+XGpioPs PS_Gpio;	/* The driver instance for GPIO Device. */
+
+int main()
+{
+	XGpioPs_Config *ConfigPtr;
+
+	printf("MIO test..\n");
+
+	/* Initialize the GPIO driver. */
+	ConfigPtr = XGpioPs_LookupConfig(GPIO_DEVICE_ID);
+	Status = XGpioPs_CfgInitialize(&Gpio, ConfigPtr,
+					ConfigPtr->BaseAddr);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+
+	return 0;
+}
