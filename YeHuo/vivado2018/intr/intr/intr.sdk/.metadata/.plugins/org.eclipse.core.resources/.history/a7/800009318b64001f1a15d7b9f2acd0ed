@@ -1,0 +1,118 @@
+/*
+ * main.c
+ *
+ *  Created on: 2024Äê8ÔÂ27ÈÕ
+ *      Author: Administrator
+ */
+
+#include "stdio.h"
+#include "sleep.h"
+#include "xparameters.h"
+#include "xgpiops.h"
+#include "xstatus.h"
+#include "xplatform_info.h"
+#include <xil_printf.h>
+
+#include "xscugic.h"
+#include "xil_exception.h"
+#include "xplatform_info.h"
+
+/* macro definition
+ * ======================================================================
+ */
+#define GPIO_DEVICE_ID  	XPAR_XGPIOPS_0_DEVICE_ID
+
+#define INTC_DEVICE_ID		XPAR_SCUGIC_SINGLE_DEVICE_ID
+#define GPIO_INTERRUPT_ID	XPAR_XGPIOPS_0_INTR
+
+#define GPIO_BANK	XGPIOPS_BANK0  /* Bank 0 of the GPIO Device */
+
+#define PS_LED	0
+
+/* global variables
+ * ======================================================================
+ */
+
+XScuGic Intc; /* The Instance of the Interrupt Controller Driver */
+
+// The following are declared globally so they are zeroed and can beeasily accessible from a debugger.
+XGpioPs PS_Gpio;	/* The driver instance for GPIO Device. */
+
+int gFlag;
+
+int main()
+{
+	int Status;
+	XGpioPs_Config *PS_ConfigPtr;
+	XScuGic_Config *IntcConfig; /* Instance of the interrupt controller */
+
+	xil_printf("GPIO Interrupt Example Test \r\n");
+
+	/* ================================ Enable MIO/EMIO ============================ */
+	/* Initialize the GPIO driver. */
+	PS_ConfigPtr = XGpioPs_LookupConfig(GPIO_DEVICE_ID);
+	Status = XGpioPs_CfgInitialize(&PS_Gpio, PS_ConfigPtr,
+			PS_ConfigPtr->BaseAddr);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	XGpioPs_SetDirectionPin(&PS_Gpio, PS_LED, 1);
+	XGpioPs_SetOutputEnablePin(&PS_Gpio, PS_LED, 1);
+
+	/* ================================ Enable MIO INTR ============================ */
+
+	Xil_ExceptionInit();
+
+	/*
+	 * Initialize the interrupt controller driver so that it is ready to
+	 * use.
+	 */
+	IntcConfig = XScuGic_LookupConfig(INTC_DEVICE_ID);
+	if (NULL == IntcConfig) {
+		return XST_FAILURE;
+	}
+
+	Status = XScuGic_CfgInitialize(&Intc, IntcConfig,
+					IntcConfig->CpuBaseAddress);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Connect the interrupt controller interrupt handler to the hardware
+	 * interrupt handling logic in the processor.
+	 */
+	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+				(Xil_ExceptionHandler)XScuGic_InterruptHandler,
+				&Intc);
+
+	/*
+	 * Connect the device driver handler that will be called when an
+	 * interrupt for the device occurs, the handler defined above performs
+	 * the specific interrupt processing for the device.
+	 */
+	Status = XScuGic_Connect(&Intc, GPIO_INTERRUPT_ID,
+				(Xil_ExceptionHandler)XGpioPs_IntrHandler,
+				(void *)&PS_Gpio);
+	if (Status != XST_SUCCESS) {
+		return Status;
+	}
+
+	/* Enable falling edge interrupts for all the pins in bank 0. */
+	XGpioPs_SetIntrType(&PS_Gpio, GPIO_BANK, 0x00, 0xFFFFFFFF, 0x00);
+
+	/* Enable the GPIO interrupts of Bank 0. */
+	XGpioPs_IntrEnable(&PS_Gpio, GPIO_BANK, (1 << Input_Pin));
+
+	while(1)
+	{
+		/* Set the GPIO output to be low. */
+		XGpioPs_WritePin(&PS_Gpio, PS_LED, gFlag);
+		gFlag = ~ gFlag;
+		sleep(1);
+	}
+
+
+	return 0;
+}
