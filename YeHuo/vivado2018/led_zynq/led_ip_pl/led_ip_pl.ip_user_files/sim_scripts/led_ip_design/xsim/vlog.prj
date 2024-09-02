@@ -1,0 +1,12 @@
+verilog xil_defaultlib --include "../../../../led_ip_pl.srcs/sources_1/bd/led_ip_design/ipshared/ec67/hdl" --include "../../../../led_ip_pl.srcs/sources_1/bd/led_ip_design/ipshared/70cf/hdl" --include "../../../../led_ip_pl.srcs/sources_1/bd/led_ip_design/ip/led_ip_design_processing_system7_0_0" \
+"../../../bd/led_ip_design/ip/led_ip_design_processing_system7_0_0/sim/led_ip_design_processing_system7_0_0.v" \
+"../../../bd/led_ip_design/ipshared/94b6/src/led_ip.v" \
+"../../../bd/led_ip_design/ipshared/94b6/hdl/led_ip_v1_0_S00_AXI.v" \
+"../../../bd/led_ip_design/ipshared/94b6/hdl/led_ip_v1_0.v" \
+"../../../bd/led_ip_design/ip/led_ip_design_led_ip_0_0/sim/led_ip_design_led_ip_0_0.v" \
+"../../../bd/led_ip_design/ip/led_ip_design_auto_pc_0/sim/led_ip_design_auto_pc_0.v" \
+"../../../bd/led_ip_design/sim/led_ip_design.v" \
+
+verilog xil_defaultlib "glbl.v"
+
+nosort

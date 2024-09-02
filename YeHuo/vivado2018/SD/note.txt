@@ -1,0 +1,16 @@
+复位完成后，硬件立马对 MIO[8:2]进行采样，完成启动模式，配置PS的PLL配置以及电压模式的配置。
+然后 PS 会跳转到 BootRom(zynq 的片上 ROM) 执行代码以便引导系统。
+这个过程会整个系统进行复位 (PL 和 PS 以及 BootRom，全部寄存器的值也复位，硬件重新采集 MIO 引脚)
+
+
+引导设备：SD卡、flash这些
+1. BootRom (APU 最先执行 BootRom 这个软件)，先执行 CPU0，CPU1 处于等待请求状态。
+2. 首先对系统进行配置，配置 SD卡 / NAND / NOR / QSPI flash 等的初始化，
+   读取 MIO 引脚配置用来决定我们通过什么介质去加载镜像(boot image fsbl).
+3. 之后从引导设备里把 FSBL / user code 复制到 OCM (片上存储器模块) 里面运行。(把代码进行分支放到 OCM 运行)
+4. FSBL ( First Stage Boot Loader)
+5. 执行 OCM 里面的镜像。
+	5.1 完成 PS 的初始化
+	5.2 如果有PL端配置，加载bit流，完成PL配置
+	5.3 SSBL (Second Stage Boot Loader) 或者 u-boot阶段, 把 ARM 裸机程序放 DDR 里
+	5.4 跳转 SSBL 扫行操作(跳转到 DDR 里面运行代码)

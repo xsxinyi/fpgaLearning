@@ -1,0 +1,16 @@
+/*
+ * main.c
+ *
+ *  Created on: 2024Äê9ÔÂ1ÈÕ
+ *      Author: Administrator
+ */
+
+#include "stdio.h"
+
+int main()
+{
+
+	return 0;
+}
+
+

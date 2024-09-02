@@ -1,0 +1,18 @@
+/*
+ * main.c
+ *
+ *  Created on: 2024Äê9ÔÂ1ÈÕ
+ *      Author: Administrator
+ */
+
+#include "stdio.h"
+#include "led_ip.h"
+#include "xparameters.h"
+
+int main()
+{
+	printf("LED IP test..\n");
+	return 0;
+}
+
+
