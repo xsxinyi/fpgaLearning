@@ -14,3 +14,13 @@
 	5.2 如果有PL端配置，加载bit流，完成PL配置
 	5.3 SSBL (Second Stage Boot Loader) 或者 u-boot阶段, 把 ARM 裸机程序放 DDR 里
 	5.4 跳转 SSBL 扫行操作(跳转到 DDR 里面运行代码)
+
+
+1. PL 侧 I/O 打开(勾选) Quad SPI Flash 接口 及 SD 接口(optional: SD接口可在MIO Configuration里打开CD，用于插拔卡检测)
+2. PS 侧 BSP 右击，打开 Board Support Package Settings，勾选 xiffs，支持 FAT 文件系统库。等其重新编译完成。生成一个 elf SDK 文件。
+3. PS 侧 在原 BSP 的基础上新建 FBSL 工程(Use exising XX_bsp)，等待 FBSL 编译完成，会生成一个 elf 文件。
+4. 用 Xilinx 工具将 FBSL / bit 流 / SDK包 打包成 BOOT.bin
+	Xilinx -> Create Boot Image -> 填写 output bif file path (会生成 BOOT.bin 在这个文件夹里) -> Add -> Debug/FBSL.elf(bootloader) 
+	-> Add -> platform/xx.bit (datafile) -> Add -> Debug/xxx(sdk).elf (datafile) -> create image.
+5. 将 SD 卡第一个分区格式化成 FAT32 格式，命名为 BOOT, 上面步骤生成的 BOOT.bin 拷进 BOOT 盘里
+6. 插入 SD 卡，设置 SD 卡启动

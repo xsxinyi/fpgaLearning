@@ -1,0 +1,7 @@
+//arch = zynq; split = false; format = BIN
+the_ROM_image:
+{
+	[bootloader]G:\Git\fpgaLearning\YeHuo\vivado2018\SD\SD_multi_GPIO\multi_GPIO.sdk\SD\FBSL\Debug\FBSL.elf
+	G:\Git\fpgaLearning\YeHuo\vivado2018\SD\SD_multi_GPIO\multi_GPIO.sdk\SD\axi_gpio_wrapper_hw_platform_0\axi_gpio_wrapper.bit
+	G:\Git\fpgaLearning\YeHuo\vivado2018\SD\SD_multi_GPIO\multi_GPIO.sdk\SD\SD_multi_GPIO\Debug\SD_multi_GPIO.elf
+}

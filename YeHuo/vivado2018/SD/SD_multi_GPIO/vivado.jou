@@ -1,0 +1,37 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Mon Sep  2 22:57:41 2024
+# Process ID: 1552
+# Current directory: G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent13088 G:\Git\fpgaLearning\YeHuo\vivado2018\SD\SD_multi_GPIO\multi_GPIO.xpr
+# Log file: G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/vivado.log
+# Journal file: G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.xpr
+update_compile_order -fileset sources_1
+open_bd_design {G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.srcs/sources_1/bd/axi_gpio/axi_gpio.bd}
+startgroup
+set_property -dict [list CONFIG.PCW_QSPI_PERIPHERAL_ENABLE {1} CONFIG.PCW_SD0_PERIPHERAL_ENABLE {1} CONFIG.PCW_SD0_SD0_IO {MIO 40 .. 45}] [get_bd_cells processing_system7_0]
+endgroup
+startgroup
+set_property -dict [list CONFIG.PCW_QSPI_GRP_SINGLE_SS_ENABLE {1} CONFIG.PCW_SD0_GRP_CD_ENABLE {1} CONFIG.PCW_SD0_GRP_CD_IO {MIO 12}] [get_bd_cells processing_system7_0]
+endgroup
+regenerate_bd_layout
+validate_bd_design
+generate_target all [get_files  G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.srcs/sources_1/bd/axi_gpio/axi_gpio.bd]
+catch { config_ip_cache -export [get_ips -all axi_gpio_processing_system7_0_0] }
+catch { config_ip_cache -export [get_ips -all axi_gpio_auto_pc_0] }
+export_ip_user_files -of_objects [get_files G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.srcs/sources_1/bd/axi_gpio/axi_gpio.bd] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.srcs/sources_1/bd/axi_gpio/axi_gpio.bd]
+launch_runs -jobs 32 axi_gpio_processing_system7_0_0_synth_1
+export_simulation -of_objects [get_files G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.srcs/sources_1/bd/axi_gpio/axi_gpio.bd] -directory G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.ip_user_files/sim_scripts -ip_user_files_dir G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.ip_user_files -ipstatic_source_dir G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.ip_user_files/ipstatic -lib_map_path [list {modelsim=G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.cache/compile_simlib/modelsim} {questa=G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.cache/compile_simlib/questa} {riviera=G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.cache/compile_simlib/riviera} {activehdl=G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+make_wrapper -files [get_files G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.srcs/sources_1/bd/axi_gpio/axi_gpio.bd] -top
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 32
+wait_on_run impl_1
+file copy -force G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.runs/impl_1/axi_gpio_wrapper.sysdef G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.sdk/SD/axi_gpio_wrapper.hdf
+
+launch_sdk -workspace G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.sdk/SD -hwspec G:/Git/fpgaLearning/YeHuo/vivado2018/SD/SD_multi_GPIO/multi_GPIO.sdk/SD/axi_gpio_wrapper.hdf

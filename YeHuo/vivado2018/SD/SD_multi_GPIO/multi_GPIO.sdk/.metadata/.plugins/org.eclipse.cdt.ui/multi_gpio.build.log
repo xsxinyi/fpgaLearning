@@ -1,0 +1,23 @@
+23:11:04 **** Auto Build of configuration Debug for project multi_gpio ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../multi_gpio_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+'Finished building: ../src/main.c'
+' '
+'Building target: multi_gpio.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../multi_gpio_bsp/ps7_cortexa9_0/lib -o "multi_gpio.elf"  ./src/main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: multi_gpio.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size multi_gpio.elf  |tee "multi_gpio.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  45644	   2984	  22712	  71340	  116ac	multi_gpio.elf
+'Finished building: multi_gpio.elf.size'
+' '
+
+23:11:07 Build Finished (took 2s.932ms)
+
