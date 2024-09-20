@@ -16,7 +16,7 @@
 	5.4 跳转 SSBL 扫行操作(跳转到 DDR 里面运行代码)
 
 
-1. PL 侧 I/O 打开(勾选) Quad SPI Flash 接口 及 SD 接口(optional: SD接口可在MIO Configuration里打开CD，用于插拔卡检测)
+1. PL 侧 I/O 打开(勾选) Quad SPI Flash 接口 及 SD 接口(optional: SD接口可在MIO Configuration里打开CD，CD对应的 MIO 去原理图里找，用于插拔卡检测)
 2. PS 侧 BSP 右击，打开 Board Support Package Settings，勾选 xiffs，支持 FAT 文件系统库。等其重新编译完成。生成一个 elf SDK 文件。
 3. PS 侧 在原 BSP 的基础上新建 FBSL 工程(Use exising XX_bsp)，等待 FBSL 编译完成，会生成一个 elf 文件。
 4. 用 Xilinx 工具将 FBSL / bit 流 / SDK包 打包成 BOOT.bin

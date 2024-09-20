@@ -1,0 +1,7 @@
+//arch = zynq; split = false; format = BIN
+the_ROM_image:
+{
+	[bootloader]G:\Git\fpgaLearning\Neptune\vivado2018\INTR_SD\INTR_SD\INTR_SD.sdk\FSBL\Debug\FSBL.elf
+	G:\Git\fpgaLearning\Neptune\vivado2018\INTR_SD\INTR_SD\INTR_SD.sdk\intr_sd_wrapper_hw_platform_0\intr_sd_wrapper.bit
+	G:\Git\fpgaLearning\Neptune\vivado2018\INTR_SD\INTR_SD\INTR_SD.sdk\intr_sd\Debug\intr_sd.elf
+}
